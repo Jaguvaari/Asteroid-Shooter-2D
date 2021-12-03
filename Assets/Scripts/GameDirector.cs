@@ -2,14 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
     public static GameDirector Instance;
     public GameObject HeroShip;
     public GameObject SpawnPointPrefab;
-
+    public int Score = 0;
     private bool allowSpawn = true;
+
+    public Text scoreText;
 
     private void Awake()
     {
@@ -35,6 +38,9 @@ public class GameDirector : MonoBehaviour
             CreateSpawnPoint();
             StartCoroutine(WaitBetweenSpawn());
         }
+
+        //scoreText
+        scoreText.text = "Score " + Score.ToString();
     }
 
     private void CreateSpawnPoint()

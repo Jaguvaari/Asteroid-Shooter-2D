@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ShipControls : MonoBehaviour
 {
     /// <summary>
@@ -17,6 +18,7 @@ public class ShipControls : MonoBehaviour
 
     public GameObject firingProjectile;
 
+    public AudioClip clip;
 
     private bool allowShooting = true;
 
@@ -84,6 +86,7 @@ public class ShipControls : MonoBehaviour
     {
         // Instantiate a projectile from prefab, place it on players position and rotate it to player heading
         GameObject bullet = Instantiate(firingProjectile, gameObject.transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(clip, transform.position);
     }
 
     IEnumerator SlowDownShots()

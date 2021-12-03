@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Projectile : MonoBehaviour
 {
     private float moveSpeed = 5f;
+
+    public AudioClip explosionClip;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +27,10 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("Hit");
+            AudioSource.PlayClipAtPoint(explosionClip, transform.position);
             Destroy(collision.gameObject); // Destroy the enemy
             Destroy(gameObject); // Destroy the projectile to prevent it from plowing through many enemies
+            GameDirector.Instance.Score += 50; // Add points for the kill
         }
     }
 
