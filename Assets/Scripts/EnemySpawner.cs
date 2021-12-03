@@ -43,6 +43,12 @@ public class EnemySpawner : MonoBehaviour
             AddMoreEnemies--;
             elapsedTime = Time.time;
         }
+
+        if (AddMoreEnemies < 1)
+        {
+            // No more enemies to spawn, die now
+            Destroy(gameObject);
+        }
     }
 
     void SpawnNewEnemy()

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private float moveSpeed = 5f;
-    public LayerMask collisionLayers;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +18,14 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.gameObject.layer == 8)
+        // Destroy enemies that enter the trigger area
+        if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            Debug.Log("Hit");
+            Destroy(collision.gameObject); // Destroy the enemy
+            Destroy(gameObject); // Destroy the projectile to prevent it from plowing through many enemies
         }
     }
 

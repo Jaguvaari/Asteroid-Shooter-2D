@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8157712860736331468}
   - component: {fileID: -1609460999703290300}
   - component: {fileID: 8178386484770984814}
-  - component: {fileID: 6790727603747658942}
+  - component: {fileID: -8826800701914496039}
   m_Layer: 7
   m_Name: Projectile
   m_TagString: Untagged
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!50 &8178386484770984814
 Rigidbody2D:
   serializedVersion: 4
@@ -121,8 +121,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!66 &6790727603747658942
-CompositeCollider2D:
+--- !u!58 &-8826800701914496039
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,15 +131,9 @@ CompositeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_Offset: {x: 0.0017293692, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.08135003

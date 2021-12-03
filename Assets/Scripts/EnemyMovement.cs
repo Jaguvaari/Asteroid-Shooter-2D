@@ -5,29 +5,21 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    Rigidbody enemyPhysics;
-
-    /// <summary>
-    /// Boolean which traces when the enemy needs a new waypoint
-    /// </summary>
-    private bool HasArrived = true;
 
     private float moveSpeed = 1.5f;
 
     private Vector3 targetWaypoint;
 
-    public float currentVelocity;
-    public float distance;
+    bool allowShooting = true;
+
+    public GameObject projectilePrefab;
+
+    private GameObject heroShip;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyPhysics = GetComponent<Rigidbody>();
-
-        if (enemyPhysics == null)
-        {
-            Debug.Log("Enemy is missing physics!");
-        }
+        heroShip = GameDirector.Instance.GetHeroShip();
     }
 
     // Update is called once per frame
@@ -36,14 +28,7 @@ public class EnemyMovement : MonoBehaviour
         if (CheckDistance() || targetWaypoint == Vector3.zero)
         {
             targetWaypoint = GetNewTargetWaypoint();
-            Debug.Log("New XXXXXXXXXXwaypoint taken");
         }
-
-        /// Ei n‰‰ heelvetin fysiikat vaan pelaa
-        //if (enemyPhysics.velocity.magnitude < moveSpeed)
-        //{
-        //    enemyPhysics.AddForce(Vector3.MoveTowards(targetWaypoint,  transform.position,  moveSpeed * Time.deltaTime));
-        //}
 
         transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, moveSpeed * Time.deltaTime);
     }
@@ -55,7 +40,6 @@ public class EnemyMovement : MonoBehaviour
     private bool CheckDistance()
     {
         bool retVal = false;
-        this.distance = (transform.position - targetWaypoint).magnitude;
 
         if ((transform.position - targetWaypoint).magnitude < 0.1f)
         {
@@ -70,5 +54,28 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector3 retWaypoint = new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(-8f, 8f), 0f);
         return retWaypoint;
+    }
+
+    private void Shooting()
+    {
+        if (allowShooting)
+        {
+            allowShooting = false;
+            Fire();
+            StartCoroutine(SlowDownShots());
+        }
+    }
+
+    private void Fire()
+    {
+        // Instantiate a projectile from prefab, place it on players position and rotate it to player heading
+        GameObject bullet = Instantiate(projectilePrefab, gameObject.transform.position, transform.rotation);
+    }
+
+    IEnumerator SlowDownShots()
+    {
+        float delay = UnityEngine.Random.Range(1f, 5f);
+        yield return new WaitForSeconds(delay);
+        allowShooting = true;
     }
 }

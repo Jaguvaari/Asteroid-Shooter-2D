@@ -17,6 +17,9 @@ public class ShipControls : MonoBehaviour
 
     public GameObject firingProjectile;
 
+
+    private bool allowShooting = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,9 +69,14 @@ public class ShipControls : MonoBehaviour
 
     private void Shooting()
     {
-        if (Input.GetAxis("Fire1") > 0 || Input.GetAxis("Xbox RightTrigger") > 0)
+        if (allowShooting)
         {
-            Fire();
+            if (Input.GetAxis("Fire1") > 0 || Input.GetAxis("Xbox RightTrigger") > 0)
+            {
+                allowShooting = false;
+                Fire();
+                StartCoroutine(SlowDownShots());
+            }
         }
     }
 
@@ -76,6 +84,12 @@ public class ShipControls : MonoBehaviour
     {
         // Instantiate a projectile from prefab, place it on players position and rotate it to player heading
         GameObject bullet = Instantiate(firingProjectile, gameObject.transform.position, transform.rotation);
+    }
+
+    IEnumerator SlowDownShots()
+    {
+        yield return new WaitForSeconds(0.3f);
+        allowShooting = true;
     }
 
     ///// Juicing tips:

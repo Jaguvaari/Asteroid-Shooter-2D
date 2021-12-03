@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6839232269199228615}
   - component: {fileID: 2777615105687286824}
   - component: {fileID: 5253309707066601768}
-  - component: {fileID: 3723085780235835847}
+  - component: {fileID: -5031411128065016382}
   m_Layer: 8
   m_Name: Asteroid
   m_TagString: Untagged
@@ -105,8 +105,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!66 &3723085780235835847
-CompositeCollider2D:
+--- !u!58 &-5031411128065016382
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,12 +118,6 @@ CompositeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_Offset: {x: -0.0017293394, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.15571198
